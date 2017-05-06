@@ -57,8 +57,17 @@ def getOne(points):
 
 def fileWrite(points,file):
 	for point in points:
-		for item in point:
-			file.write(str(item)+",")
+		#print("In fileWriter")
+		#print (point)
+		#print("Out of FW")
+		for item in range(len(point)):
+			if item != (len(point)-1):
+				print("here")
+				print (item)
+				print("outofhere")
+				file.write(str(point[item])+",")
+			else:
+				file.write(str(point[item]))
 		file.write("\n")
 
 def minus(totalPts,neighbourhood):
@@ -134,11 +143,21 @@ for point in pointSet:
 		clusters.insert(len(clusters),C)
 print ("\n\n************Cluster**************\n\n")
 stops=[]
+test=[]
+#print (type(temp))
 for count in range(0,len(clusters)):
 	print ("Cluster %d" % count)
-	print (clusters[count])
-	clusters[count][2]=count
-	stops.append(clusters)
+	#print (temp[count])
+	for in_cluster in range(0,len(clusters[count])):
+		
+		temp=list(clusters[count][in_cluster])
+		#print(type(temp))
+		#temp[count][in_cluster][2]=count
+		temp[2]=count
+		#clusters=tuple(temp)
+		print (temp)
+		test.append(temp)
+	stops.append(temp)
 """
 file
 #print(clusters)
@@ -158,9 +177,12 @@ for stop in clusters:
 """
 
 file = open(outputFile,'w')
-fileWrite(stops,file)
+fileWrite(test,file)
 file.close()
 
+print("**********************test****************")
+print(test)
+print("*********************end*******************")
 print(len(clusters), " stops found")
 print("Created PS file...",outputFile)
 
