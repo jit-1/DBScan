@@ -1,0 +1,5 @@
+{
+	"input_file" :"abc123.txt"
+	,"output_file" :"out_abc6.txt"
+	,"eps":40
+	,"minpts":1}
