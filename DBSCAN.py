@@ -50,7 +50,7 @@ def getMean(points):
 		total_distance += math.sqrt(math.pow(mean_lat-point[0],2)+math.pow(mean_long-point[1],2))
 		#tn_sum = tn_sum + int(point[2])
 	mean_distance = total_distance/length
-	return (mean_lat,mean_long,mean_distance,float(tn_sum)/length)
+	return (mean_lat,mean_long,mean_distance,float(tn_sum)/length,counter)
 
 def getOne(points):
 	return points[len(points)/2]
@@ -67,7 +67,7 @@ def minus(totalPts,neighbourhood):
 		try:
 			tp.remove(n)
 		except Exception as e:
-			print ('fishy!!')
+			print('fishy!!')
 	return tp
 try:
 	fileName= sys.argv[1]
@@ -86,6 +86,7 @@ except Exception as e:
 file = open(fileName,"r")
 lines = file.read().split('\n')
 file.close()
+counter=0
 
 lines = lines[1:]
 
@@ -100,10 +101,10 @@ for line in lines:
 		#point_t = ((int(timeunits[0])*60) + int(timeunits[1])) * 60 + int(timeunits[2])
 		#pointSet.insert(len(pointSet), (point_x,point_y,point_t))
 		#pointSet += [(point_x,point_y,point_t)]
-		pointSet += [(point_x,point_y)]
+		pointSet += [(point_x,point_y,counter)]
 	except Exception as e:
-		print (e)
-	print (line)
+		print(e)
+	#print(line)
 	pass
 
 pts = pointSet[:]
@@ -131,7 +132,16 @@ for point in pointSet:
 				N = N + N1
 				pts = minus(pts,N1)
 		clusters.insert(len(clusters),C)
-print (clusters)
+print ("\n\n************Cluster**************\n\n")
+stops=[]
+for count in range(0,len(clusters)):
+	print ("Cluster %d" % count)
+	print (clusters[count])
+	clusters[count][2]=count
+	stops.append(clusters)
+"""
+file
+#print(clusters)
 stops = []
 #i=0
 for stop in clusters:
@@ -143,11 +153,14 @@ for stop in clusters:
 	'''
 	mean_stop = getMean(stop)
 	stops.append(mean_stop)
+	#stops.append(counter)
+	#counter+=1
+"""
 
 file = open(outputFile,'w')
 fileWrite(stops,file)
 file.close()
 
-print (len(clusters), " stops found")
-print ("Created PS file...",outputFile)
+print(len(clusters), " stops found")
+print("Created PS file...",outputFile)
 
