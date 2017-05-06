@@ -1,2 +1,2 @@
 # DBScan
-Modfied DBScan Algorithm for Cluster Grouping
+Modified DBScan Algorithm for Cluster Grouping
